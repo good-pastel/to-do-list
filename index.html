@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="logo-wrapper">
+      <div class="logo-img"></div>
+    </div>
+
+    <div class="login-box">
+      <input id="userIdInput" placeholder="Enter your user ID" />
+      <button onclick="setUserId()">Start</button>
+    </div>
+
+    <div class="app">
+      <div class="app-header">
+        <div>
+          <div class="app-title">To-Do List</div>
+          <div class="date" id="currentDate"></div>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <input type="text" id="todoInput" placeholder="Add New Task..." />
+        <button id="addBtn">Add</button>
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All Tasks</button>
+        <button class="filter-btn btn-pending" data-filter="active">
+          Pending
+        </button>
+        <button class="filter-btn" data-filter="completed">Done</button>
+      </div>
+
+      <div class="stats" id="statsText">0 task</div>
+
+      <ul id="todoList"></ul>
+
+      <div class="footer">
+        <span>Data is stored in your browser (localStorage).</span>
+        <button class="clear-btn" id="clearCompletedBtn">
+          Delete completed tasks
+        </button>
+      </div>
+    </div>
+    <footer class="copyright">
+      &copy; 2025. Powered by
+      <a href="https://good-pastel.github.io" target="_blank">Good Pastel</a>
+    </footer>
+  </body>
+  <script src="script.js"></script>
+</html>
