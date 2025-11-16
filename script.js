@@ -4,6 +4,8 @@ const API_URL =
 
 // User ID dan Login
 
+// // Selalu mulai tanpa user setiap halaman dibuka
+// localStorage.removeItem("USER_ID");
 let USER_ID = localStorage.getItem("USER_ID");
 
 function startApp() {
@@ -41,9 +43,13 @@ function updateUserLabel() {
 
 if (!USER_ID) {
   document.getElementById("loginBox").style.display = "block";
-  document.querySelector(".app").style.display = "none";
+  document.querySelector(".app").style.display = "block";
+  document.getElementById("backHomeBtn").style.display = "none";
+  document.getElementById("changeUserBtn").style.display = "none";
+  label.textContent = "No User Selected";
+  btn.style.display = "none";
 } else {
-  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
   document.querySelector(".app").style.display = "block";
 }
 
@@ -56,10 +62,6 @@ if (backHomeBtn) {
     // Hapus user ID
     localStorage.removeItem("USER_ID");
     localStorage.removeItem("todo-list-data-v1");
-
-    // (Opsional) Hapus todos lokal kalau mau bersih total
-    // localStorage.removeItem("todo-list-data-v1");
-
     USER_ID = null;
 
     // Tampilkan halaman login
@@ -324,6 +326,10 @@ filterButtons.forEach((btn) => {
 });
 
 clearCompletedBtn.addEventListener("click", clearCompleted);
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+});
 
 // Render awal
 if (USER_ID) {
