@@ -11,11 +11,21 @@
       <div class="logo-img"></div>
     </div>
 
-    <div class="login-box">
+    <div id="loginBox" class="login-box">
       <input id="userIdInput" placeholder="Enter your user ID" />
-      <button onclick="setUserId()">Start</button>
+      <button onclick="startApp()">Start</button>
     </div>
-
+    <div class="current-user">
+      <div
+        id="currentUser"
+        style="margin-top: 10px; font-size: 14px; color: #555"
+      ></div>
+      <div class="user-bar">
+        <span id="currentUserLabel"></span>
+        <button id="changeUserBtn" class="link-btn">Change user</button>
+      </div>
+    </div>
+    <button id="backHomeBtn" class="back-home-btn">Back to Home</button>
     <div class="app">
       <div class="app-header">
         <div>

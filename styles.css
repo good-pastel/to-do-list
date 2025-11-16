@@ -38,7 +38,9 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* efek shadow */
 }
 
-.login-box button {
+.login-box button,
+.link-btn,
+.back-home-btn {
   padding: 10px 14px;
   border-radius: 10px;
   border: none;
@@ -52,6 +54,18 @@ body {
 }
 
 .login-box button:hover {
+  background: #4338ca;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+  transform: translateY(-1px);
+}
+
+.link-btn:hover {
+  background: #4338ca;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+  transform: translateY(-1px);
+}
+
+.back-home-btn:hover {
   background: #4338ca;
   box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
   transform: translateY(-1px);

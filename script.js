@@ -2,18 +2,72 @@
 const API_URL =
   "https://script.google.com/macros/s/AKfycbwBEPEoSD9DhQRanasBhvNoaxtjwv4OAMPkHieLdn8KBcQoGgKL8mc_zpVVVnj9aueJSA/exec";
 
-// Get user ID
+// User ID dan Login
 
-function setUserId() {
-  const input = document.getElementById("userIdInput").value.trim();
-  if (!input) return alert("Please enter a user ID");
+let USER_ID = localStorage.getItem("USER_ID");
 
-  localStorage.setItem("USER_ID", input);
+function startApp() {
+  const id = document.getElementById("userIdInput").value.trim();
+  if (!id) return alert("Please enter a user ID!");
+
+  localStorage.setItem("USER_ID", id);
+  USER_ID = id;
   location.reload();
 }
 
-const USER_ID = localStorage.getItem("USER_ID");
+function updateUserLabel() {
+  const label = document.getElementById("currentUserLabel");
+  const btn = document.getElementById("changeUserBtn");
+
+  if (!label || !btn) return;
+
+  if (USER_ID) {
+    label.textContent = "Logged in as : " + USER_ID;
+    btn.style.display = "inline";
+  } else {
+    label.textContent = "No User Selected";
+    btn.style.display = "none";
+  }
+
+  btn.onclick = () => {
+    localStorage.removeItem("USER_ID");
+    localStorage.removeItem("todo-list-data-v1");
+    USER_ID = null;
+    todos = [];
+    renderTodos && renderTodos();
+    location.reload();
+  };
+}
+
 if (!USER_ID) {
+  document.getElementById("loginBox").style.display = "block";
+  document.querySelector(".app").style.display = "none";
+} else {
+  document.getElementById("loginBox").style.display = "none";
+  document.querySelector(".app").style.display = "block";
+}
+
+updateUserLabel();
+
+// Tombol Back to Home (kembali ke loginBox)
+const backHomeBtn = document.getElementById("backHomeBtn");
+if (backHomeBtn) {
+  backHomeBtn.onclick = () => {
+    // Hapus user ID
+    localStorage.removeItem("USER_ID");
+    localStorage.removeItem("todo-list-data-v1");
+
+    // (Opsional) Hapus todos lokal kalau mau bersih total
+    // localStorage.removeItem("todo-list-data-v1");
+
+    USER_ID = null;
+
+    // Tampilkan halaman login
+    document.getElementById("loginBox").style.display = "block";
+    document.querySelector(".app").style.display = "block";
+
+    updateUserLabel();
+  };
 }
 
 // ------ Data & Inisialisasi ------
@@ -272,4 +326,6 @@ filterButtons.forEach((btn) => {
 clearCompletedBtn.addEventListener("click", clearCompleted);
 
 // Render awal
-fetchTodosFromServer();
+if (USER_ID) {
+  fetchTodosFromServer();
+}
